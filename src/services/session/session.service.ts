@@ -12,8 +12,9 @@ export class SessionService {
     }
 
     async createSession(dto: CreateSessionDto): Promise<SessionDocument> {
-        const newSession = await this.sessionModel.create({...dto, validity_end_date: new Date().getTime() + 1000 * 60 * 60 * 24})
-        console.log(newSession);
+        const { durationInHours, ...rest} = dto
+        const newSession = await this.sessionModel.create({...rest, validity_end_date: new Date().getTime() + 1000 * 60 * 60 * (durationInHours || 24)})
+        // console.log(newSession);
         return newSession;
     }
 

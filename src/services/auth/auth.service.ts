@@ -17,7 +17,7 @@ export class AuthService {
         @InjectModel(User.name) private userModel: Model<UserDocument>,
         private sessionService: SessionService,
         private jwtService: JwtService,
-    ) { }
+    ) {}
 
     async register(registerDto: RegisterDto) {
         const hashedPassword = await bcrypt.hash(registerDto.password, 10);
@@ -68,10 +68,10 @@ export class AuthService {
 
     async login(loginDto: LoginDto) {
         const user = await this.verifyUser(loginDto.email, loginDto.password);
-        console.log(user)
+        // console.log(user)
         if (user) {
             const existingSession = await this.sessionService.getSessionByUserId(user._id);
-            console.log(existingSession)
+            // console.log(existingSession)
             let session: SessionDocument
             if (existingSession) {
                 session = await this.sessionService.updateSession(existingSession._id, {
