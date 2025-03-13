@@ -6,9 +6,12 @@ import { SessionModule } from './services/session/session.module';
 import { ConfigModule } from '@nestjs/config';
 import jwtConfig from './config/jwt.config';
 import { AuthModule } from './services/auth/auth.module';
-import { AuthController } from './services/auth/auth.controller';
-import { SessionService } from './services/session/session.service';
-import { AuthService } from './services/auth/auth.service';
+import { AuthController } from './services/auth/auth.controller'
+// import { AuthService } from './services/auth/auth.service';
+import { FilmNftModule } from './services/contract/film-nft/film-nft.module';
+import { InvestmentModule } from './services/contract/investment/investment.module';
+import { LicensingModule } from './services/contract/licensing/licensing.module';
+import { RevenueSplitModule } from './services/contract/revenue-split/revenue.module';
 
 @Module({
   imports: [
@@ -18,7 +21,10 @@ import { AuthService } from './services/auth/auth.service';
       isGlobal: true,
       load: [jwtConfig],
     }), 
-    SessionModule,
+    FilmNftModule,
+    InvestmentModule,
+    LicensingModule,
+    RevenueSplitModule,
     AuthModule,
   ],
   controllers: [AppController],
